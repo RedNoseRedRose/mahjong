@@ -1,0 +1,10 @@
+^E:\WORKSPACE_AMUSEMENTS\MAHJONG\BACKEND\MAHJONG_CORE\BUILD\CMAKEFILES\A478F152303C88DD0BCC6DA0EEC3B643\GENERATE.STAMP.RULE
+setlocal
+F:\CMake\bin\cmake.exe -SE:/Workspace_amusements/Mahjong/backend/mahjong_core -BE:/Workspace_amusements/Mahjong/backend/mahjong_core/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file E:/Workspace_amusements/Mahjong/backend/mahjong_core/build/mahjong_core.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

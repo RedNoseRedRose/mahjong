@@ -1,0 +1,356 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{28776848-366D-38BD-AB02-D0B801C12193}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>mahjong_core</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Workspace_amusements\Mahjong\backend\mahjong_core\build\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">mahjong_core.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">mahjong_core.cp37-win_amd64</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.pyd</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Workspace_amusements\Mahjong\backend\mahjong_core\build\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">mahjong_core.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">mahjong_core.cp37-win_amd64</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.pyd</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\Workspace_amusements\Mahjong\backend\mahjong_core\build\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">mahjong_core.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">mahjong_core.cp37-win_amd64</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.pyd</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\Workspace_amusements\Mahjong\backend\mahjong_core\build\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">mahjong_core.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">mahjong_core.cp37-win_amd64</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.pyd</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "F:/Miniconda/envs/Mahjong/Include" /external:I "F:/Miniconda/envs/Mahjong/Library/include" /bigobj</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;Py_NO_LINK_LIB;CMAKE_INTDIR="Debug";mahjong_core_EXPORTS</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;Py_NO_LINK_LIB;CMAKE_INTDIR=\"Debug\";mahjong_core_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>F:\Miniconda\envs\Mahjong\Include;F:\Miniconda\envs\Mahjong\Library\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>F:\Miniconda\envs\Mahjong\Include;F:\Miniconda\envs\Mahjong\Library\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>F:\Miniconda\envs\Mahjong\libs\python37.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>E:/Workspace_amusements/Mahjong/backend/mahjong_core/build/Debug/mahjong_core.lib</ImportLibrary>
+      <ProgramDataBaseFile>E:/Workspace_amusements/Mahjong/backend/mahjong_core/build/Debug/mahjong_core.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "F:/Miniconda/envs/Mahjong/Include" /external:I "F:/Miniconda/envs/Mahjong/Library/include" /bigobj</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;Py_NO_LINK_LIB;CMAKE_INTDIR="Release";mahjong_core_EXPORTS</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;Py_NO_LINK_LIB;CMAKE_INTDIR=\"Release\";mahjong_core_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>F:\Miniconda\envs\Mahjong\Include;F:\Miniconda\envs\Mahjong\Library\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>F:\Miniconda\envs\Mahjong\Include;F:\Miniconda\envs\Mahjong\Library\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>F:\Miniconda\envs\Mahjong\libs\python37.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>E:/Workspace_amusements/Mahjong/backend/mahjong_core/build/Release/mahjong_core.lib</ImportLibrary>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <ProgramDataBaseFile>E:/Workspace_amusements/Mahjong/backend/mahjong_core/build/Release/mahjong_core.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "F:/Miniconda/envs/Mahjong/Include" /external:I "F:/Miniconda/envs/Mahjong/Library/include" /bigobj</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;Py_NO_LINK_LIB;CMAKE_INTDIR="MinSizeRel";mahjong_core_EXPORTS</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;Py_NO_LINK_LIB;CMAKE_INTDIR=\"MinSizeRel\";mahjong_core_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>F:\Miniconda\envs\Mahjong\Include;F:\Miniconda\envs\Mahjong\Library\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>F:\Miniconda\envs\Mahjong\Include;F:\Miniconda\envs\Mahjong\Library\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>F:\Miniconda\envs\Mahjong\libs\python37.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>E:/Workspace_amusements/Mahjong/backend/mahjong_core/build/MinSizeRel/mahjong_core.lib</ImportLibrary>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <ProgramDataBaseFile>E:/Workspace_amusements/Mahjong/backend/mahjong_core/build/MinSizeRel/mahjong_core.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "F:/Miniconda/envs/Mahjong/Include" /external:I "F:/Miniconda/envs/Mahjong/Library/include" /bigobj</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;Py_NO_LINK_LIB;CMAKE_INTDIR="RelWithDebInfo";mahjong_core_EXPORTS</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;Py_NO_LINK_LIB;CMAKE_INTDIR=\"RelWithDebInfo\";mahjong_core_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>F:\Miniconda\envs\Mahjong\Include;F:\Miniconda\envs\Mahjong\Library\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>F:\Miniconda\envs\Mahjong\Include;F:\Miniconda\envs\Mahjong\Library\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>F:\Miniconda\envs\Mahjong\libs\python37.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>E:/Workspace_amusements/Mahjong/backend/mahjong_core/build/RelWithDebInfo/mahjong_core.lib</ImportLibrary>
+      <ProgramDataBaseFile>E:/Workspace_amusements/Mahjong/backend/mahjong_core/build/RelWithDebInfo/mahjong_core.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\Workspace_amusements\Mahjong\backend\mahjong_core\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule E:/Workspace_amusements/Mahjong/backend/mahjong_core/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+F:\CMake\bin\cmake.exe -SE:/Workspace_amusements/Mahjong/backend/mahjong_core -BE:/Workspace_amusements/Mahjong/backend/mahjong_core/build --check-stamp-file E:/Workspace_amusements/Mahjong/backend/mahjong_core/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Workspace_amusements\Mahjong\backend\mahjong_core\build\CMakeFiles\4.0.3\CMakeCCompiler.cmake;E:\Workspace_amusements\Mahjong\backend\mahjong_core\build\CMakeFiles\4.0.3\CMakeCXXCompiler.cmake;E:\Workspace_amusements\Mahjong\backend\mahjong_core\build\CMakeFiles\4.0.3\CMakeRCCompiler.cmake;E:\Workspace_amusements\Mahjong\backend\mahjong_core\build\CMakeFiles\4.0.3\CMakeSystem.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeCCompiler.cmake.in;F:\CMake\share\cmake-4.0\Modules\CMakeCCompilerABI.c;F:\CMake\share\cmake-4.0\Modules\CMakeCInformation.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeCXXCompiler.cmake.in;F:\CMake\share\cmake-4.0\Modules\CMakeCXXCompilerABI.cpp;F:\CMake\share\cmake-4.0\Modules\CMakeCXXInformation.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeCommonLanguageInclude.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeCompilerIdDetection.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineCCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineCXXCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineCompilerABI.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineCompilerId.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineCompilerSupport.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineRCCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineSystem.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeFindBinUtils.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeGenericSystem.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeInitializeConfigs.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeLanguageInformation.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeParseImplicitIncludeInfo.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeParseImplicitLinkInfo.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeParseLibraryArchitecture.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeRCCompiler.cmake.in;F:\CMake\share\cmake-4.0\Modules\CMakeRCInformation.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeSystem.cmake.in;F:\CMake\share\cmake-4.0\Modules\CMakeSystemSpecificInformation.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeSystemSpecificInitialize.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeTestCCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeTestCXXCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeTestCompilerCommon.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeTestRCCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CheckCXXCompilerFlag.cmake;F:\CMake\share\cmake-4.0\Modules\CheckCXXSourceCompiles.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\ADSP-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\ARMCC-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\ARMClang-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\AppleClang-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Borland-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\CMakeCommonCompilerMacros.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Clang-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Cray-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\CrayClang-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\GHS-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\GNU-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\HP-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\IAR-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Intel-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\LCC-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\MSVC-C.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\MSVC-CXX.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\MSVC-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\MSVC.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\NVHPC-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\OrangeC-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\PGI-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\PathScale-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\SCO-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\TI-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\TIClang-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Tasking-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Watcom-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\XL-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\zOS-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CompilerId\VS-10.vcxproj.in;F:\CMake\share\cmake-4.0\Modules\FindPackageHandleStandardArgs.cmake;F:\CMake\share\cmake-4.0\Modules\FindPackageMessage.cmake;F:\CMake\share\cmake-4.0\Modules\FindPython\Support.cmake;F:\CMake\share\cmake-4.0\Modules\FindPython3.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CMakeCLinkerInformation.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CMakeCXXLinkerInformation.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CMakeCommonLinkerInformation.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CMakeDetermineLinkerId.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CMakeInspectCLinker.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CMakeInspectCXXLinker.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CheckCompilerFlag.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CheckFlagCommonConfig.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CheckSourceCompiles.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\FeatureTesting.cmake;F:\CMake\share\cmake-4.0\Modules\Linker\MSVC-C.cmake;F:\CMake\share\cmake-4.0\Modules\Linker\MSVC-CXX.cmake;F:\CMake\share\cmake-4.0\Modules\Linker\MSVC.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC-C.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Windows-Determine-CXX.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Windows-Initialize.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Windows-MSVC-C.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Windows-MSVC-CXX.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Windows-MSVC.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Windows.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\WindowsPaths.cmake;F:\Miniconda\envs\Mahjong\Library\share\cmake\pybind11\pybind11Common.cmake;F:\Miniconda\envs\Mahjong\Library\share\cmake\pybind11\pybind11Config.cmake;F:\Miniconda\envs\Mahjong\Library\share\cmake\pybind11\pybind11ConfigVersion.cmake;F:\Miniconda\envs\Mahjong\Library\share\cmake\pybind11\pybind11NewTools.cmake;F:\Miniconda\envs\Mahjong\Library\share\cmake\pybind11\pybind11Targets.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\Workspace_amusements\Mahjong\backend\mahjong_core\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule E:/Workspace_amusements/Mahjong/backend/mahjong_core/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+F:\CMake\bin\cmake.exe -SE:/Workspace_amusements/Mahjong/backend/mahjong_core -BE:/Workspace_amusements/Mahjong/backend/mahjong_core/build --check-stamp-file E:/Workspace_amusements/Mahjong/backend/mahjong_core/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Workspace_amusements\Mahjong\backend\mahjong_core\build\CMakeFiles\4.0.3\CMakeCCompiler.cmake;E:\Workspace_amusements\Mahjong\backend\mahjong_core\build\CMakeFiles\4.0.3\CMakeCXXCompiler.cmake;E:\Workspace_amusements\Mahjong\backend\mahjong_core\build\CMakeFiles\4.0.3\CMakeRCCompiler.cmake;E:\Workspace_amusements\Mahjong\backend\mahjong_core\build\CMakeFiles\4.0.3\CMakeSystem.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeCCompiler.cmake.in;F:\CMake\share\cmake-4.0\Modules\CMakeCCompilerABI.c;F:\CMake\share\cmake-4.0\Modules\CMakeCInformation.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeCXXCompiler.cmake.in;F:\CMake\share\cmake-4.0\Modules\CMakeCXXCompilerABI.cpp;F:\CMake\share\cmake-4.0\Modules\CMakeCXXInformation.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeCommonLanguageInclude.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeCompilerIdDetection.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineCCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineCXXCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineCompilerABI.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineCompilerId.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineCompilerSupport.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineRCCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineSystem.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeFindBinUtils.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeGenericSystem.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeInitializeConfigs.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeLanguageInformation.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeParseImplicitIncludeInfo.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeParseImplicitLinkInfo.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeParseLibraryArchitecture.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeRCCompiler.cmake.in;F:\CMake\share\cmake-4.0\Modules\CMakeRCInformation.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeSystem.cmake.in;F:\CMake\share\cmake-4.0\Modules\CMakeSystemSpecificInformation.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeSystemSpecificInitialize.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeTestCCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeTestCXXCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeTestCompilerCommon.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeTestRCCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CheckCXXCompilerFlag.cmake;F:\CMake\share\cmake-4.0\Modules\CheckCXXSourceCompiles.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\ADSP-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\ARMCC-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\ARMClang-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\AppleClang-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Borland-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\CMakeCommonCompilerMacros.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Clang-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Cray-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\CrayClang-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\GHS-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\GNU-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\HP-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\IAR-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Intel-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\LCC-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\MSVC-C.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\MSVC-CXX.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\MSVC-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\MSVC.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\NVHPC-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\OrangeC-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\PGI-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\PathScale-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\SCO-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\TI-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\TIClang-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Tasking-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Watcom-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\XL-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\zOS-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CompilerId\VS-10.vcxproj.in;F:\CMake\share\cmake-4.0\Modules\FindPackageHandleStandardArgs.cmake;F:\CMake\share\cmake-4.0\Modules\FindPackageMessage.cmake;F:\CMake\share\cmake-4.0\Modules\FindPython\Support.cmake;F:\CMake\share\cmake-4.0\Modules\FindPython3.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CMakeCLinkerInformation.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CMakeCXXLinkerInformation.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CMakeCommonLinkerInformation.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CMakeDetermineLinkerId.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CMakeInspectCLinker.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CMakeInspectCXXLinker.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CheckCompilerFlag.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CheckFlagCommonConfig.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CheckSourceCompiles.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\FeatureTesting.cmake;F:\CMake\share\cmake-4.0\Modules\Linker\MSVC-C.cmake;F:\CMake\share\cmake-4.0\Modules\Linker\MSVC-CXX.cmake;F:\CMake\share\cmake-4.0\Modules\Linker\MSVC.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC-C.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Windows-Determine-CXX.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Windows-Initialize.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Windows-MSVC-C.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Windows-MSVC-CXX.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Windows-MSVC.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Windows.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\WindowsPaths.cmake;F:\Miniconda\envs\Mahjong\Library\share\cmake\pybind11\pybind11Common.cmake;F:\Miniconda\envs\Mahjong\Library\share\cmake\pybind11\pybind11Config.cmake;F:\Miniconda\envs\Mahjong\Library\share\cmake\pybind11\pybind11ConfigVersion.cmake;F:\Miniconda\envs\Mahjong\Library\share\cmake\pybind11\pybind11NewTools.cmake;F:\Miniconda\envs\Mahjong\Library\share\cmake\pybind11\pybind11Targets.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\Workspace_amusements\Mahjong\backend\mahjong_core\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule E:/Workspace_amusements/Mahjong/backend/mahjong_core/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+F:\CMake\bin\cmake.exe -SE:/Workspace_amusements/Mahjong/backend/mahjong_core -BE:/Workspace_amusements/Mahjong/backend/mahjong_core/build --check-stamp-file E:/Workspace_amusements/Mahjong/backend/mahjong_core/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\Workspace_amusements\Mahjong\backend\mahjong_core\build\CMakeFiles\4.0.3\CMakeCCompiler.cmake;E:\Workspace_amusements\Mahjong\backend\mahjong_core\build\CMakeFiles\4.0.3\CMakeCXXCompiler.cmake;E:\Workspace_amusements\Mahjong\backend\mahjong_core\build\CMakeFiles\4.0.3\CMakeRCCompiler.cmake;E:\Workspace_amusements\Mahjong\backend\mahjong_core\build\CMakeFiles\4.0.3\CMakeSystem.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeCCompiler.cmake.in;F:\CMake\share\cmake-4.0\Modules\CMakeCCompilerABI.c;F:\CMake\share\cmake-4.0\Modules\CMakeCInformation.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeCXXCompiler.cmake.in;F:\CMake\share\cmake-4.0\Modules\CMakeCXXCompilerABI.cpp;F:\CMake\share\cmake-4.0\Modules\CMakeCXXInformation.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeCommonLanguageInclude.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeCompilerIdDetection.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineCCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineCXXCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineCompilerABI.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineCompilerId.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineCompilerSupport.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineRCCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineSystem.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeFindBinUtils.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeGenericSystem.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeInitializeConfigs.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeLanguageInformation.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeParseImplicitIncludeInfo.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeParseImplicitLinkInfo.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeParseLibraryArchitecture.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeRCCompiler.cmake.in;F:\CMake\share\cmake-4.0\Modules\CMakeRCInformation.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeSystem.cmake.in;F:\CMake\share\cmake-4.0\Modules\CMakeSystemSpecificInformation.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeSystemSpecificInitialize.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeTestCCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeTestCXXCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeTestCompilerCommon.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeTestRCCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CheckCXXCompilerFlag.cmake;F:\CMake\share\cmake-4.0\Modules\CheckCXXSourceCompiles.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\ADSP-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\ARMCC-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\ARMClang-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\AppleClang-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Borland-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\CMakeCommonCompilerMacros.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Clang-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Cray-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\CrayClang-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\GHS-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\GNU-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\HP-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\IAR-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Intel-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\LCC-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\MSVC-C.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\MSVC-CXX.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\MSVC-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\MSVC.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\NVHPC-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\OrangeC-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\PGI-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\PathScale-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\SCO-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\TI-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\TIClang-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Tasking-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Watcom-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\XL-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\zOS-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CompilerId\VS-10.vcxproj.in;F:\CMake\share\cmake-4.0\Modules\FindPackageHandleStandardArgs.cmake;F:\CMake\share\cmake-4.0\Modules\FindPackageMessage.cmake;F:\CMake\share\cmake-4.0\Modules\FindPython\Support.cmake;F:\CMake\share\cmake-4.0\Modules\FindPython3.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CMakeCLinkerInformation.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CMakeCXXLinkerInformation.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CMakeCommonLinkerInformation.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CMakeDetermineLinkerId.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CMakeInspectCLinker.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CMakeInspectCXXLinker.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CheckCompilerFlag.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CheckFlagCommonConfig.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CheckSourceCompiles.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\FeatureTesting.cmake;F:\CMake\share\cmake-4.0\Modules\Linker\MSVC-C.cmake;F:\CMake\share\cmake-4.0\Modules\Linker\MSVC-CXX.cmake;F:\CMake\share\cmake-4.0\Modules\Linker\MSVC.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC-C.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Windows-Determine-CXX.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Windows-Initialize.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Windows-MSVC-C.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Windows-MSVC-CXX.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Windows-MSVC.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Windows.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\WindowsPaths.cmake;F:\Miniconda\envs\Mahjong\Library\share\cmake\pybind11\pybind11Common.cmake;F:\Miniconda\envs\Mahjong\Library\share\cmake\pybind11\pybind11Config.cmake;F:\Miniconda\envs\Mahjong\Library\share\cmake\pybind11\pybind11ConfigVersion.cmake;F:\Miniconda\envs\Mahjong\Library\share\cmake\pybind11\pybind11NewTools.cmake;F:\Miniconda\envs\Mahjong\Library\share\cmake\pybind11\pybind11Targets.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\Workspace_amusements\Mahjong\backend\mahjong_core\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule E:/Workspace_amusements/Mahjong/backend/mahjong_core/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+F:\CMake\bin\cmake.exe -SE:/Workspace_amusements/Mahjong/backend/mahjong_core -BE:/Workspace_amusements/Mahjong/backend/mahjong_core/build --check-stamp-file E:/Workspace_amusements/Mahjong/backend/mahjong_core/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\Workspace_amusements\Mahjong\backend\mahjong_core\build\CMakeFiles\4.0.3\CMakeCCompiler.cmake;E:\Workspace_amusements\Mahjong\backend\mahjong_core\build\CMakeFiles\4.0.3\CMakeCXXCompiler.cmake;E:\Workspace_amusements\Mahjong\backend\mahjong_core\build\CMakeFiles\4.0.3\CMakeRCCompiler.cmake;E:\Workspace_amusements\Mahjong\backend\mahjong_core\build\CMakeFiles\4.0.3\CMakeSystem.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeCCompiler.cmake.in;F:\CMake\share\cmake-4.0\Modules\CMakeCCompilerABI.c;F:\CMake\share\cmake-4.0\Modules\CMakeCInformation.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeCXXCompiler.cmake.in;F:\CMake\share\cmake-4.0\Modules\CMakeCXXCompilerABI.cpp;F:\CMake\share\cmake-4.0\Modules\CMakeCXXInformation.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeCommonLanguageInclude.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeCompilerIdDetection.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineCCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineCXXCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineCompilerABI.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineCompilerId.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineCompilerSupport.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineRCCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeDetermineSystem.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeFindBinUtils.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeGenericSystem.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeInitializeConfigs.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeLanguageInformation.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeParseImplicitIncludeInfo.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeParseImplicitLinkInfo.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeParseLibraryArchitecture.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeRCCompiler.cmake.in;F:\CMake\share\cmake-4.0\Modules\CMakeRCInformation.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeSystem.cmake.in;F:\CMake\share\cmake-4.0\Modules\CMakeSystemSpecificInformation.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeSystemSpecificInitialize.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeTestCCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeTestCXXCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeTestCompilerCommon.cmake;F:\CMake\share\cmake-4.0\Modules\CMakeTestRCCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CheckCXXCompilerFlag.cmake;F:\CMake\share\cmake-4.0\Modules\CheckCXXSourceCompiles.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\ADSP-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\ARMCC-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\ARMClang-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\AppleClang-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Borland-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\CMakeCommonCompilerMacros.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Clang-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Cray-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\CrayClang-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\GHS-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\GNU-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\HP-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\IAR-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Intel-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\LCC-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\MSVC-C.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\MSVC-CXX.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\MSVC-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\MSVC.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\NVHPC-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\OrangeC-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\PGI-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\PathScale-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\SCO-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\TI-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\TIClang-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Tasking-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\Watcom-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\XL-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\zOS-C-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;F:\CMake\share\cmake-4.0\Modules\CompilerId\VS-10.vcxproj.in;F:\CMake\share\cmake-4.0\Modules\FindPackageHandleStandardArgs.cmake;F:\CMake\share\cmake-4.0\Modules\FindPackageMessage.cmake;F:\CMake\share\cmake-4.0\Modules\FindPython\Support.cmake;F:\CMake\share\cmake-4.0\Modules\FindPython3.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CMakeCLinkerInformation.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CMakeCXXLinkerInformation.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CMakeCommonLinkerInformation.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CMakeDetermineLinkerId.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CMakeInspectCLinker.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CMakeInspectCXXLinker.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CheckCompilerFlag.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CheckFlagCommonConfig.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\CheckSourceCompiles.cmake;F:\CMake\share\cmake-4.0\Modules\Internal\FeatureTesting.cmake;F:\CMake\share\cmake-4.0\Modules\Linker\MSVC-C.cmake;F:\CMake\share\cmake-4.0\Modules\Linker\MSVC-CXX.cmake;F:\CMake\share\cmake-4.0\Modules\Linker\MSVC.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC-C.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Windows-Determine-CXX.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Windows-Initialize.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Windows-MSVC-C.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Windows-MSVC-CXX.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Windows-MSVC.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\Windows.cmake;F:\CMake\share\cmake-4.0\Modules\Platform\WindowsPaths.cmake;F:\Miniconda\envs\Mahjong\Library\share\cmake\pybind11\pybind11Common.cmake;F:\Miniconda\envs\Mahjong\Library\share\cmake\pybind11\pybind11Config.cmake;F:\Miniconda\envs\Mahjong\Library\share\cmake\pybind11\pybind11ConfigVersion.cmake;F:\Miniconda\envs\Mahjong\Library\share\cmake\pybind11\pybind11NewTools.cmake;F:\Miniconda\envs\Mahjong\Library\share\cmake\pybind11\pybind11Targets.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\Workspace_amusements\Mahjong\backend\mahjong_core\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="E:\Workspace_amusements\Mahjong\backend\mahjong_core\mahjong_core.cpp" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="E:\Workspace_amusements\Mahjong\backend\mahjong_core\build\ZERO_CHECK.vcxproj">
+      <Project>{B14E6FC5-5D5C-310B-86DC-29FFA2D7AABF}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
