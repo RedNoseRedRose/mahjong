@@ -1,22 +1,119 @@
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-from typing import List
+from pydantic import BaseModel, BaseSettings
+from typing import List, Optional
 import sys
 import os
+import logging
+import asyncio
 
-sys.path.append(os.path.join(os.path.dirname(__file__), "mahjong_core"))
-import mahjong_core
+from fastapi.middleware.cors import CORSMiddleware
+
+logger = logging.getLogger("uvicorn.error")
+
+app = FastAPI(title="Mahjong Backend")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost", "http://127.0.0.1", "*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Robust import of mahjong_core extension: try normal import, then fallback candidate paths.
+mahjong_core = None
+try:
+    import mahjong_core  # try normal import
+    mahjong_core = mahjong_core
+except Exception as e:
+    logger.warning("mahjong_core import failed: %s. Trying fallback paths...", e)
+    base = os.path.dirname(__file__)
+    candidates = [
+        os.path.join(base, "mahjong_core"),
+        os.path.join(base, "mahjong_core", "Release"),
+        os.path.join(base, "mahjong_core", "build", "Release"),
+        os.path.join(base, "mahjong_core", "build"),
+        os.path.join(base, "mahjong_core", "Release"),
+    ]
+    for p in candidates:
+        if os.path.isdir(p) and p not in sys.path:
+            sys.path.insert(0, p)
+    try:
+        import mahjong_core
+        mahjong_core = mahjong_core
+    except Exception as e2:
+        logger.error("Failed to import mahjong_core after fallbacks: %s", e2)
+        mahjong_core = None
+
+class Settings(BaseSettings):
+    # pending-discard timeout in seconds
+    pending_discard_timeout: int = 10
+    # cleanup loop interval in seconds (can be float)
+    pending_cleanup_interval: float = 1.0
+
+    class Config:
+        env_prefix = "MJ_"  # env vars: MJ_PENDING_DISCARD_TIMEOUT, MJ_PENDING_CLEANUP_INTERVAL
+
+settings = Settings()
+app.state.settings = settings
+
+# import room after settings defined
 from routers import room
 
-app = FastAPI()
-app.include_router(room.router)
+app.include_router(room.router, prefix="/rooms", tags=["rooms"])
+
+@app.on_event("startup")
+async def _startup_tasks():
+    # set routers.room event loop so background threads can schedule websocket sends
+    room.set_event_loop(asyncio.get_event_loop())
+    try:
+        room.start_pending_cleanup(interval=settings.pending_cleanup_interval,
+                                   timeout=settings.pending_discard_timeout)
+    except Exception:
+        logger.exception("Failed to start pending_discard cleanup thread")
 
 class TilesRequest(BaseModel):
     tiles: List[int]
+
+@app.get("/")
+def root():
+    return {"status": "ok", "mahjong_core_loaded": bool(mahjong_core)}
 
 @app.post("/check_win")
 def check_win(req: TilesRequest):
     if len(req.tiles) != 14:
         raise HTTPException(status_code=400, detail="Tiles must be 14 numbers")
-    result = mahjong_core.is_win(req.tiles)
-    return {"win": result}
+    if mahjong_core is None or not hasattr(mahjong_core, "is_win"):
+        raise HTTPException(status_code=500, detail="mahjong_core module not available")
+    try:
+        result = mahjong_core.is_win(req.tiles)
+    except Exception as e:
+        logger.exception("mahjong_core.is_win error")
+        raise HTTPException(status_code=500, detail=str(e))
+    return {"win": bool(result)}
+
+from pydantic import BaseModel
+from typing import Optional
+
+class UpdateCleanupModel(BaseModel):
+    pending_discard_timeout: Optional[float] = None
+    pending_cleanup_interval: Optional[float] = None
+
+@app.post("/admin/update_cleanup")
+def admin_update_cleanup(cfg: UpdateCleanupModel):
+    # update runtime settings
+    if cfg.pending_discard_timeout is not None:
+        app.state.settings.pending_discard_timeout = cfg.pending_discard_timeout
+    if cfg.pending_cleanup_interval is not None:
+        app.state.settings.pending_cleanup_interval = cfg.pending_cleanup_interval
+    # restart cleanup thread with new values
+    try:
+        # routers.room is imported as 'room' earlier
+        import routers.room as room_module
+        room_module.restart_pending_cleanup(interval=app.state.settings.pending_cleanup_interval,
+                                            timeout=app.state.settings.pending_discard_timeout)
+    except Exception:
+        logger.exception("Failed to restart pending cleanup")
+        raise HTTPException(status_code=500, detail="failed to restart cleanup")
+    # return new settings
+    return {"ok": True, "settings": app.state.settings.dict()}

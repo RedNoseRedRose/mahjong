@@ -1,0 +1,45 @@
+name: CI - backend tests
+
+on:
+  pull_request:
+
+jobs:
+  test-backend:
+    name: Run backend integration tests (Windows, Python 3.7)
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.7
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.7'
+
+      - name: Install dependencies
+        working-directory: ./backend
+        shell: powershell
+        run: |
+          python -m pip install --upgrade pip
+          if (Test-Path requirements.txt) { pip install -r requirements.txt } else { pip install fastapi uvicorn requests pytest }
+
+      - name: Start uvicorn backend (background)
+        working-directory: ./backend
+        shell: powershell
+        run: |
+          Write-Host "Starting uvicorn..."
+          Start-Process -FilePath python -ArgumentList '-m uvicorn app:app --host 127.0.0.1 --port 8000' -NoNewWindow
+          Start-Sleep -s 5
+          Write-Host "uvicorn started (background)."
+
+      - name: Run pytest (unit/integration)
+        working-directory: ./backend
+        shell: powershell
+        run: |
+          pytest -q
+
+      - name: Run pending-discard automation script
+        working-directory: ./backend
+        shell: powershell
+        run: |
+          python scripts/auto_test_pending.py

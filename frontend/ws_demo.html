@@ -1,0 +1,164 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Mahjong WS Demo</title>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; margin: 16px; }
+    input, select, button { margin: 4px; }
+    #log { white-space: pre-wrap; border: 1px solid #ccc; padding: 8px; height: 360px; overflow: auto; background:#f9f9f9;}
+    .controls { margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <h3>Mahjong WebSocket Demo</h3>
+
+  <div class="controls">
+    Room ID: <input id="roomId" size="4" value="1" />
+    Player: <input id="player" size="8" value="Alice" />
+    <button id="btnCreate">Create Room</button>
+    <button id="btnJoin">Join Room</button>
+    <button id="btnStart">Start Game</button>
+    <button id="btnConnect">Connect WS</button>
+    <button id="btnDisconnect">Disconnect WS</button>
+  </div>
+
+  <div class="controls">
+    Discard tile: <input id="tile" size="4" value="5" />
+    <button id="btnDiscard">Discard</button>
+
+    Claim:
+    <select id="claimAction">
+      <option value="chi">chi</option>
+      <option value="peng">peng</option>
+      <option value="gang">gang</option>
+      <option value="hu">hu</option>
+    </select>
+    Tiles (for chi, comma list): <input id="claimTiles" size="10" />
+    <button id="btnClaim">Claim</button>
+    <button id="btnPass">Pass</button>
+  </div>
+
+  <div class="controls">
+    Update cleanup (sec): <input id="timeout" size="4" value="5" />
+    Interval (sec): <input id="interval" size="4" value="1" />
+    <button id="btnUpdateCleanup">Update Cleanup</button>
+  </div>
+
+  <h4>Events / Logs</h4>
+  <div id="log"></div>
+
+<script>
+const BASE = "http://127.0.0.1:8000";
+let ws = null;
+let wsRoom = null;
+
+function log(...args){
+  const el = document.getElementById('log');
+  const t = new Date().toISOString();
+  el.textContent = `${t}  ${args.join(' ')}\n` + el.textContent;
+}
+
+async function api(path, params={}, method='POST', body=null){
+  const url = new URL(BASE + path);
+  Object.keys(params || {}).forEach(k => url.searchParams.append(k, params[k]));
+  const opts = { method, headers: {} };
+  if (body !== null) {
+    opts.headers['Content-Type'] = 'application/json';
+    opts.body = JSON.stringify(body);
+  }
+  const resp = await fetch(url.toString(), opts);
+  const txt = await resp.text();
+  try { return { ok: resp.ok, status: resp.status, json: JSON.parse(txt), text: txt }; }
+  catch(e){ return { ok: resp.ok, status: resp.status, text: txt }; }
+}
+
+document.getElementById('btnCreate').onclick = async () => {
+  const player = document.getElementById('player').value;
+  const r = await api('/rooms/create_room', { player });
+  log('create_room:', r.status, r.ok, r.json || r.text);
+  if (r.ok && r.json) document.getElementById('roomId').value = r.json.room_id;
+};
+
+document.getElementById('btnJoin').onclick = async () => {
+  const room = document.getElementById('roomId').value;
+  const player = document.getElementById('player').value;
+  const r = await api('/rooms/join_room', { room_id: room, player });
+  log('join_room:', r.status, r.ok, r.json || r.text);
+};
+
+document.getElementById('btnStart').onclick = async () => {
+  const room = document.getElementById('roomId').value;
+  const r = await api('/rooms/start_game', { room_id: room });
+  log('start_game:', r.status, r.ok, r.json || r.text);
+};
+
+function wsUrlFor(roomId){
+  return `ws://127.0.0.1:8000/rooms/ws/${roomId}`;
+}
+
+document.getElementById('btnConnect').onclick = () => {
+  const room = document.getElementById('roomId').value;
+  if (ws) { log('Already connected'); return; }
+  const url = wsUrlFor(room);
+  log('Connecting ws to', url);
+  ws = new WebSocket(url);
+  ws.onopen = () => { wsRoom = room; log('WS open for room', room); };
+  ws.onmessage = (ev) => {
+    try {
+      const data = JSON.parse(ev.data);
+      log('WS event:', JSON.stringify(data));
+    } catch(e){
+      log('WS raw:', ev.data);
+    }
+  };
+  ws.onclose = () => { log('WS closed'); ws = null; wsRoom = null; };
+  ws.onerror = (e) => { log('WS error', e); };
+};
+
+document.getElementById('btnDisconnect').onclick = () => {
+  if (ws) ws.close();
+};
+
+document.getElementById('btnDiscard').onclick = async () => {
+  const room = document.getElementById('roomId').value;
+  const player = document.getElementById('player').value;
+  const tile = document.getElementById('tile').value;
+  const r = await api('/rooms/discard_tile', { room_id: room, player, tile });
+  log('discard_tile:', r.status, r.ok, r.json || r.text);
+};
+
+document.getElementById('btnClaim').onclick = async () => {
+  const room = document.getElementById('roomId').value;
+  const player = document.getElementById('player').value;
+  const action = document.getElementById('claimAction').value;
+  const tiles = document.getElementById('claimTiles').value || undefined;
+  const params = { room_id: room, player, action };
+  if (tiles) params.tiles = tiles;
+  const r = await api('/rooms/claim', params);
+  log('claim:', r.status, r.ok, r.json || r.text);
+};
+
+document.getElementById('btnPass').onclick = async () => {
+  const room = document.getElementById('roomId').value;
+  const player = document.getElementById('player').value;
+  const r = await api('/rooms/pass_claim', { room_id: room, player });
+  log('pass_claim:', r.status, r.ok, r.json || r.text);
+};
+
+document.getElementById('btnUpdateCleanup').onclick = async () => {
+  const timeout = parseFloat(document.getElementById('timeout').value);
+  const interval = parseFloat(document.getElementById('interval').value);
+  const r = await api('/admin/update_cleanup', {}, 'POST', { pending_discard_timeout: timeout, pending_cleanup_interval: interval });
+  log('update_cleanup:', r.status, r.ok, r.json || r.text);
+};
+
+// convenience: auto-connect when room id changes
+document.getElementById('roomId').addEventListener('change', () => {
+  if (ws) ws.close();
+});
+
+log('Demo loaded. Start backend and use controls to interact.');
+</script>
+</body>
+</html>
