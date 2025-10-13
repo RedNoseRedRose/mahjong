@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Header
 from pydantic import BaseModel, BaseSettings
 from typing import List, Optional
 import sys
@@ -50,9 +50,14 @@ class Settings(BaseSettings):
     pending_discard_timeout: int = 10
     # cleanup loop interval in seconds (can be float)
     pending_cleanup_interval: float = 1.0
+    # websocket idle config (seconds)
+    ws_idle_timeout: float = 30.0
+    ws_cleanup_interval: float = 5.0
+    # admin token (if set, admin endpoints and ws require this token)
+    admin_token: Optional[str] = None
 
     class Config:
-        env_prefix = "MJ_"  # env vars: MJ_PENDING_DISCARD_TIMEOUT, MJ_PENDING_CLEANUP_INTERVAL
+        env_prefix = "MJ_"  # env vars: MJ_PENDING_DISCARD_TIMEOUT, MJ_PENDING_CLEANUP_INTERVAL, MJ_ADMIN_TOKEN
 
 settings = Settings()
 app.state.settings = settings
@@ -64,13 +69,16 @@ app.include_router(room.router, prefix="/rooms", tags=["rooms"])
 
 @app.on_event("startup")
 async def _startup_tasks():
-    # set routers.room event loop so background threads can schedule websocket sends
+    # supply event loop for websocket send scheduling
     room.set_event_loop(asyncio.get_event_loop())
     try:
         room.start_pending_cleanup(interval=settings.pending_cleanup_interval,
                                    timeout=settings.pending_discard_timeout)
+        # start websocket idle cleanup
+        room.start_ws_cleanup(interval=settings.ws_cleanup_interval,
+                              timeout=settings.ws_idle_timeout)
     except Exception:
-        logger.exception("Failed to start pending_discard cleanup thread")
+        logger.exception("Failed to start background cleanup threads")
 
 class TilesRequest(BaseModel):
     tiles: List[int]
@@ -100,7 +108,17 @@ class UpdateCleanupModel(BaseModel):
     pending_cleanup_interval: Optional[float] = None
 
 @app.post("/admin/update_cleanup")
-def admin_update_cleanup(cfg: UpdateCleanupModel):
+def admin_update_cleanup(cfg: UpdateCleanupModel, x_admin_token: Optional[str] = Header(None), authorization: Optional[str] = Header(None)):
+    # simple header-based admin auth: check X-Admin-Token or Authorization: Bearer <token>
+    token_required = app.state.settings.admin_token
+    if token_required:
+        provided = None
+        if x_admin_token:
+            provided = x_admin_token
+        elif authorization and authorization.lower().startswith("bearer "):
+            provided = authorization.split(None, 1)[1]
+        if provided != token_required:
+            raise HTTPException(status_code=401, detail="admin token required or invalid")
     # update runtime settings
     if cfg.pending_discard_timeout is not None:
         app.state.settings.pending_discard_timeout = cfg.pending_discard_timeout
@@ -108,7 +126,6 @@ def admin_update_cleanup(cfg: UpdateCleanupModel):
         app.state.settings.pending_cleanup_interval = cfg.pending_cleanup_interval
     # restart cleanup thread with new values
     try:
-        # routers.room is imported as 'room' earlier
         import routers.room as room_module
         room_module.restart_pending_cleanup(interval=app.state.settings.pending_cleanup_interval,
                                             timeout=app.state.settings.pending_discard_timeout)

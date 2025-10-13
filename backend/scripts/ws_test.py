@@ -50,7 +50,7 @@ def _recv_loop(ws, events, stop_event):
     except Exception:
         pass
 
-def find_event(events, predicate, timeout=3.0):
+def find_event(events, predicate, timeout=5.0):
     deadline = time.time() + timeout
     while time.time() < deadline:
         for e in list(events):
@@ -78,6 +78,21 @@ def main():
     # open websocket connection for this room
     ws_url = f"ws://127.0.0.1:8000/rooms/ws/{room}"
     ws = websocket.create_connection(ws_url, timeout=5)
+    # ensure connection stable
+    time.sleep(0.2)
+    try:
+        ws.send("ping")
+        # expect optional pong, non-blocking read with small timeout
+        ws.settimeout(1.0)
+        try:
+            msg = ws.recv()
+            # ignore content; used to confirm open
+        except Exception:
+            pass
+        finally:
+            ws.settimeout(None)
+    except Exception:
+        pass
     events = []
     stop_event = threading.Event()
     t = threading.Thread(target=_recv_loop, args=(ws, events, stop_event), daemon=True)

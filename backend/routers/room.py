@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request, Header, WebSocket, WebSocketDisconnect, Depends
 from models.room import Room
 from typing import List, Optional
 import threading
@@ -10,8 +10,7 @@ import importlib.util
 import importlib.machinery
 import time
 import asyncio
-from fastapi import WebSocket, WebSocketDisconnect
-from typing import Set, Dict, Optional
+from typing import Dict, Optional
 
 logger = logging.getLogger("uvicorn.error")
 
@@ -347,8 +346,23 @@ def pass_claim(room_id: int, player: str):
             return {"passed": True, "resolved": "no_claims"}
     return {"passed": True, "resolved": "waiting_other_passes"}
 
+# admin auth dependency
+def require_admin(request: Request, x_admin_token: Optional[str] = Header(None), authorization: Optional[str] = Header(None)):
+    settings = request.app.state.settings
+    token_required = getattr(settings, "admin_token", None)
+    if not token_required:
+        return  # no admin token configured -> allow
+    provided = None
+    if x_admin_token:
+        provided = x_admin_token
+    elif authorization and authorization.lower().startswith("bearer "):
+        provided = authorization.split(None, 1)[1]
+    if provided != token_required:
+        raise HTTPException(status_code=401, detail="admin token required or invalid")
+
+# Protect admin set_hand route (example)
 @router.post("/admin/set_hand")
-def admin_set_hand(room_id: int, player: str, tiles: List[int]):
+def admin_set_hand(room_id: int, player: str, tiles: List[int], _auth=Depends(require_admin)):
     """Test helper: set a player's hand explicitly (dev only)."""
     with rooms_lock:
         room = rooms.get(room_id)
@@ -358,6 +372,62 @@ def admin_set_hand(room_id: int, player: str, tiles: List[int]):
             raise HTTPException(status_code=400, detail="Player not in room")
         room.hands[player] = tiles[:]
     return {"room_id": room_id, "player": player, "hand_count": len(room.hands[player])}
+
+# WebSocket: validate token on connect (query param or header)
+@router.websocket("/ws/{room_id}")
+async def websocket_room(ws: WebSocket, room_id: int):
+    # accept first to access query params or headers
+    await ws.accept()
+    # get configured token
+    settings = ws.scope.get("app").state.settings
+    token_required = getattr(settings, "admin_token", None)
+    # token may be supplied as ?token=... or header x-admin-token or authorization
+    q = ws.query_params
+    provided = q.get("token")
+    if not provided:
+        # headers available in ASGI scope: list of (bytes, bytes)
+        headers = {}
+        for k, v in ws.scope.get("headers", []):
+            try:
+                headers[k.decode()] = v.decode()
+            except Exception:
+                # ignore undecodable header
+                continue
+        # try x-admin-token or authorization
+        provided = headers.get("x-admin-token") or headers.get("authorization")
+    if provided and provided.lower().startswith("bearer "):
+        provided = provided.split(None, 1)[1]
+    if token_required and provided != token_required:
+        # unauthorized: close websocket
+        try:
+            await ws.close(code=1008)
+        except Exception:
+            pass
+        return
+
+    # existing connection handling...
+    rid = int(room_id)
+    room_connections.setdefault(rid, {})[ws] = time.time()
+    try:
+        while True:
+            try:
+                msg = await ws.receive_text()
+            except WebSocketDisconnect:
+                break
+            except Exception:
+                room_connections.get(rid, {})[ws] = time.time()
+                await asyncio.sleep(0.1)
+                continue
+            # update last activity timestamp
+            room_connections.get(rid, {})[ws] = time.time()
+            # respond to simple heartbeat pings from client
+            if msg == "ping":
+                try:
+                    await ws.send_text("pong")
+                except Exception:
+                    pass
+    finally:
+        room_connections.get(rid, {}).pop(ws, None)
 
 # pending discard timeout defaults (kept for fallback if app does not call start_pending_cleanup)
 PENDING_DISCARD_TIMEOUT = float(os.getenv("MJ_PENDING_DISCARD_TIMEOUT", 10))
@@ -422,45 +492,137 @@ def restart_pending_cleanup(interval: Optional[float] = None, timeout: Optional[
     start_pending_cleanup(interval=interval, timeout=timeout)
 
 # websocket support / broadcast
+# room websocket connections: room_id -> { websocket: last_activity_ts }
+room_connections: Dict[int, Dict[WebSocket, float]] = {}
 _loop: Optional[asyncio.AbstractEventLoop] = None
-room_connections: Dict[int, Set[WebSocket]] = {}
 
 def set_event_loop(loop: asyncio.AbstractEventLoop):
     global _loop
     _loop = loop
 
 def _broadcast_room(room_id: int, event: dict):
-    """Thread-safe broadcast to all websockets in room (uses saved event loop)."""
-    conns = room_connections.get(room_id, set()).copy()
+    conns = room_connections.get(room_id, {}).copy()
     if not conns or _loop is None:
         return
-    for ws in list(conns):
+    for ws in list(conns.keys()):
         try:
-            # schedule send on the application's event loop
             asyncio.run_coroutine_threadsafe(ws.send_json(event), _loop)
         except Exception:
             logger.exception("Failed to send websocket message, removing connection")
-            # best-effort removal
-            try:
-                room_connections[room_id].discard(ws)
-            except Exception:
-                pass
+            room_connections.get(room_id, {}).pop(ws, None)
 
 @router.websocket("/ws/{room_id}")
 async def websocket_room(ws: WebSocket, room_id: int):
     """WebSocket endpoint for room events. Clients receive JSON events."""
+    # accept first to access query params or headers
     await ws.accept()
+    # get configured token
+    settings = ws.scope.get("app").state.settings
+    token_required = getattr(settings, "admin_token", None)
+    # token may be supplied as ?token=... or header x-admin-token or authorization
+    q = ws.query_params
+    provided = q.get("token")
+    if not provided:
+        # headers available in ASGI scope: list of (bytes, bytes)
+        headers = {}
+        for k, v in ws.scope.get("headers", []):
+            try:
+                headers[k.decode()] = v.decode()
+            except Exception:
+                # ignore undecodable header
+                continue
+        # try x-admin-token or authorization
+        provided = headers.get("x-admin-token") or headers.get("authorization")
+    if provided and provided.lower().startswith("bearer "):
+        provided = provided.split(None, 1)[1]
+    if token_required and provided != token_required:
+        # unauthorized: close websocket
+        try:
+            await ws.close(code=1008)
+        except Exception:
+            pass
+        return
+
+    # existing connection handling...
     rid = int(room_id)
-    room_connections.setdefault(rid, set()).add(ws)
+    room_connections.setdefault(rid, {})[ws] = time.time()
     try:
         while True:
-            # keep connection alive; client may send pings or subscribe messages
             try:
-                await ws.receive_text()
+                msg = await ws.receive_text()
             except WebSocketDisconnect:
                 break
             except Exception:
-                # ignore other receives (no-op)
+                room_connections.get(rid, {})[ws] = time.time()
                 await asyncio.sleep(0.1)
+                continue
+            # update last activity timestamp
+            room_connections.get(rid, {})[ws] = time.time()
+            # respond to simple heartbeat pings from client
+            if msg == "ping":
+                try:
+                    await ws.send_text("pong")
+                except Exception:
+                    pass
     finally:
-        room_connections.get(rid, set()).discard(ws)
+        room_connections.get(rid, {}).pop(ws, None)
+
+# websocket cleanup thread (close idle connections)
+_ws_cleanup_thread: Optional[threading.Thread] = None
+_ws_cleanup_stop_event: Optional[threading.Event] = None
+
+def _ws_cleanup_loop(stop_event: threading.Event, interval: float, timeout: float):
+    logger.info("WS cleanup thread started (interval=%s, idle_timeout=%s)", interval, timeout)
+    while not stop_event.is_set():
+        try:
+            stopped = stop_event.wait(interval)
+            if stopped:
+                break
+            now = time.time()
+            to_close = []
+            for rid, conns in list(room_connections.items()):
+                for ws, last in list(conns.items()):
+                    if now - last > timeout:
+                        to_close.append((rid, ws))
+            for rid, ws in to_close:
+                logger.info("Closing stale websocket for room %s", rid)
+                try:
+                    if _loop is not None:
+                        asyncio.run_coroutine_threadsafe(ws.close(), _loop)
+                except Exception:
+                    logger.exception("Error closing stale websocket")
+                room_connections.get(rid, {}).pop(ws, None)
+        except Exception:
+            logger.exception("Exception in ws cleanup loop")
+    logger.info("WS cleanup thread exiting")
+
+def start_ws_cleanup(interval: Optional[float] = None, timeout: Optional[float] = None):
+    """Start background thread to close idle websocket connections.
+
+    If interval/timeout are None the module defaults or env values are used.
+    """
+    global _ws_cleanup_thread, _ws_cleanup_stop_event
+    if _ws_cleanup_thread and _ws_cleanup_thread.is_alive():
+        return
+    if interval is None:
+        interval = _PENDING_CLEANUP_INTERVAL
+    if timeout is None:
+        timeout = PENDING_DISCARD_TIMEOUT
+    _ws_cleanup_stop_event = threading.Event()
+    _ws_cleanup_thread = threading.Thread(target=_ws_cleanup_loop, args=(_ws_cleanup_stop_event, interval, timeout), daemon=True)
+    _ws_cleanup_thread.start()
+
+def stop_ws_cleanup(timeout: float = 2.0):
+    """Stop the background websocket cleanup thread, waiting up to `timeout` seconds."""
+    global _ws_cleanup_thread, _ws_cleanup_stop_event
+    if _ws_cleanup_stop_event:
+        _ws_cleanup_stop_event.set()
+    if _ws_cleanup_thread:
+        _ws_cleanup_thread.join(timeout)
+    _ws_cleanup_thread = None
+    _ws_cleanup_stop_event = None
+
+def restart_ws_cleanup(interval: Optional[float] = None, timeout: Optional[float] = None):
+    """Restart websocket cleanup thread with new parameters."""
+    stop_ws_cleanup()
+    start_ws_cleanup(interval=interval, timeout=timeout)
