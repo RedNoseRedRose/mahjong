@@ -38,14 +38,36 @@ jobs:
           python -m pip install --upgrade pip
           if (Test-Path requirements.txt) { pip install -r requirements.txt } else { pip install fastapi uvicorn[standard] websocket-client requests pytest }
 
-      - name: Start uvicorn backend (background)
+      - name: Start uvicorn backend (background) and redirect logs
         working-directory: ./backend
         shell: powershell
         run: |
-          Write-Host "Starting uvicorn..."
-          Start-Process -FilePath python -ArgumentList '-m uvicorn app:app --host 127.0.0.1 --port 8000' -NoNewWindow
-          Start-Sleep -s 6
+          Write-Host "Starting uvicorn and redirecting output to uvicorn.log..."
+          # Start uvicorn in background, redirect stdout/stderr to uvicorn.log
+          Start-Process -FilePath python -ArgumentList '-m uvicorn app:app --host 127.0.0.1 --port 8000' -NoNewWindow -RedirectStandardOutput .\uvicorn.log -RedirectStandardError .\uvicorn.log
+          # give uvicorn more time to startup
+          Start-Sleep -s 12
           Write-Host "uvicorn started (background)."
+
+      - name: Wait for backend to respond (probe)
+        working-directory: ./backend
+        shell: powershell
+        run: |
+          $ok = $false
+          $deadline = (Get-Date).AddSeconds(30)
+          while ((Get-Date) -lt $deadline) {
+            try {
+              $r = Invoke-WebRequest "http://127.0.0.1:8000/openapi.json" -UseBasicParsing -ErrorAction Stop
+              if ($r.StatusCode -eq 200) { $ok = $true; break }
+            } catch { Start-Sleep -s 1 }
+          }
+          if (-not $ok) {
+            Write-Warning "Backend did not respond at http://127.0.0.1:8000 within 30s. Contents of uvicorn.log:"
+            Get-Content .\uvicorn.log -Tail 200 | Write-Host
+            exit 1
+          } else {
+            Write-Host "Backend responded to probe."
+          }
 
       - name: Run pytest (unit/integration)
         working-directory: ./backend
