@@ -42,8 +42,8 @@ jobs:
           } else {
               Write-Host 'No requirements.txt — installing common deps'
           }
-          Write-Host 'Ensuring uvicorn and test deps are installed'
-          python -m pip install --upgrade 'uvicorn[standard]' fastapi websocket-client requests pytest --no-cache-dir
+          Write-Host 'Ensuring uvicorn, pydantic-settings and test deps are installed'
+          python -m pip install --upgrade 'uvicorn[standard]' fastapi 'pydantic-settings' websocket-client requests pytest --no-cache-dir
           Write-Host 'Installed packages (summary):'
           python -m pip list --disable-pip-version-check
 

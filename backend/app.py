@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException, Header
-from pydantic import BaseModel, BaseSettings
+from pydantic import BaseModel
+from pydantic_settings import BaseSettings
 from typing import List, Optional
 import sys
 import os
