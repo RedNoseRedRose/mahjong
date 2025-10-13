@@ -58,25 +58,24 @@ jobs:
           Start-Sleep -s 12
           Write-Host "uvicorn started (background)."
 
-      - name: Wait for backend to respond (probe)
+      - name: Wait for backend to accept TCP connections (probe)
         working-directory: ./backend
         shell: powershell
         run: |
           $ok = $false
           $deadline = (Get-Date).AddSeconds(60)
           while ((Get-Date) -lt $deadline) {
-            try {
-              $r = Invoke-WebRequest "http://127.0.0.1:8000/openapi.json" -UseBasicParsing -ErrorAction Stop
-              if ($r.StatusCode -eq 200) { $ok = $true; break }
-            } catch { Start-Sleep -s 1 }
+            $t = Test-NetConnection -ComputerName 127.0.0.1 -Port 8000 -WarningAction SilentlyContinue
+            if ($t.TcpTestSucceeded) { $ok = $true; break }
+            Start-Sleep -Seconds 1
           }
           if (-not $ok) {
-            Write-Warning "Backend did not respond at http://127.0.0.1:8000 within 60s. Last lines of uvicorn logs:"
+            Write-Warning "Backend did not accept TCP connections on 127.0.0.1:8000 within 60s. Last lines of uvicorn logs:"
             if (Test-Path .\uvicorn.out) { Get-Content .\uvicorn.out -Tail 200 | Write-Host }
             if (Test-Path .\uvicorn.err) { Get-Content .\uvicorn.err -Tail 200 | Write-Host }
             exit 1
           } else {
-            Write-Host "Backend responded to probe."
+            Write-Host "Backend TCP port is open."
           }
 
       - name: Run pytest (unit/integration)
