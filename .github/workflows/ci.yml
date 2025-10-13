@@ -40,9 +40,12 @@ jobs:
             Write-Host "Installing from requirements.txt"
             python -m pip install --upgrade -r requirements.txt
           } else {
-            Write-Host "Installing deps: fastapi, uvicorn[standard], websocket-client, requests, pytest"
-            python -m pip install --upgrade "uvicorn[standard]" fastapi websocket-client requests pytest --no-cache-dir
+            Write-Host "No requirements.txt — installing common deps"
           }
+          Write-Host "Ensuring uvicorn and test deps are installed"
+          python -m pip install --upgrade "uvicorn[standard]" fastapi websocket-client requests pytest --no-cache-dir
+          Write-Host "Installed packages (summary):"
+          python -m pip list --disable-pip-version-check
 
       - name: Start uvicorn backend (background) and redirect logs
         working-directory: ./backend
