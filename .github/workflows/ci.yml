@@ -63,7 +63,7 @@ jobs:
         shell: powershell
         run: |
           $ok = $false
-          $deadline = (Get-Date).AddSeconds(30)
+          $deadline = (Get-Date).AddSeconds(60)
           while ((Get-Date) -lt $deadline) {
             try {
               $r = Invoke-WebRequest "http://127.0.0.1:8000/openapi.json" -UseBasicParsing -ErrorAction Stop
@@ -71,7 +71,7 @@ jobs:
             } catch { Start-Sleep -s 1 }
           }
           if (-not $ok) {
-            Write-Warning "Backend did not respond at http://127.0.0.1:8000 within 30s. Last lines of uvicorn logs:"
+            Write-Warning "Backend did not respond at http://127.0.0.1:8000 within 60s. Last lines of uvicorn logs:"
             if (Test-Path .\uvicorn.out) { Get-Content .\uvicorn.out -Tail 200 | Write-Host }
             if (Test-Path .\uvicorn.err) { Get-Content .\uvicorn.err -Tail 200 | Write-Host }
             exit 1
