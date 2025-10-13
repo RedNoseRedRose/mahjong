@@ -17,6 +17,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Warn if MJ_ADMIN_TOKEN not set (non-blocking)
+        shell: powershell
+        run: |
+          if (-not $env:MJ_ADMIN_TOKEN -or $env:MJ_ADMIN_TOKEN -eq "") {
+            Write-Warning "MJ_ADMIN_TOKEN secret is not set. Admin endpoints will be accessible without a token during CI. This is OK for development but not recommended for production."
+          } else {
+            Write-Host "MJ_ADMIN_TOKEN is provided via repository secrets."
+          }
+
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
