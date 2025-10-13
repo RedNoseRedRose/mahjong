@@ -42,9 +42,9 @@ jobs:
         working-directory: ./backend
         shell: powershell
         run: |
-          Write-Host "Starting uvicorn and redirecting output to uvicorn.log..."
-          # Start uvicorn in background, redirect stdout/stderr to uvicorn.log
-          Start-Process -FilePath python -ArgumentList '-m uvicorn app:app --host 127.0.0.1 --port 8000' -NoNewWindow -RedirectStandardOutput .\uvicorn.log -RedirectStandardError .\uvicorn.log
+          Write-Host "Starting uvicorn and redirecting output to uvicorn.out / uvicorn.err..."
+          # Start uvicorn in background, redirect stdout and stderr to separate files (Start-Process doesn't accept same file for both)
+          Start-Process -FilePath python -ArgumentList '-m uvicorn app:app --host 127.0.0.1 --port 8000' -NoNewWindow -RedirectStandardOutput .\uvicorn.out -RedirectStandardError .\uvicorn.err
           # give uvicorn more time to startup
           Start-Sleep -s 12
           Write-Host "uvicorn started (background)."
@@ -62,8 +62,9 @@ jobs:
             } catch { Start-Sleep -s 1 }
           }
           if (-not $ok) {
-            Write-Warning "Backend did not respond at http://127.0.0.1:8000 within 30s. Contents of uvicorn.log:"
-            Get-Content .\uvicorn.log -Tail 200 | Write-Host
+            Write-Warning "Backend did not respond at http://127.0.0.1:8000 within 30s. Last lines of uvicorn logs:"
+            if (Test-Path .\uvicorn.out) { Get-Content .\uvicorn.out -Tail 200 | Write-Host }
+            if (Test-Path .\uvicorn.err) { Get-Content .\uvicorn.err -Tail 200 | Write-Host }
             exit 1
           } else {
             Write-Host "Backend responded to probe."
