@@ -63,20 +63,27 @@ jobs:
         shell: powershell
         run: |
           $ok = $false
-          $deadline = (Get-Date).AddSeconds(60)
+          $deadline = (Get-Date).AddSeconds(90)
           while ((Get-Date) -lt $deadline) {
-            try {
-              $c = New-Object System.Net.Sockets.TcpClient
-              $c.Connect('127.0.0.1', 8000)
-              $c.Close()
-              $ok = $true
-              break
-            } catch {
-              Start-Sleep -Seconds 1
+            foreach ($addr in @('127.0.0.1','::1')) {
+              try {
+                $c = New-Object System.Net.Sockets.TcpClient
+                $ar = $c.BeginConnect($addr, 8000, $null, $null)
+                if ($ar.AsyncWaitHandle.WaitOne(1000)) {
+                  $c.EndConnect($ar)
+                  $c.Close()
+                  $ok = $true
+                  break
+                } else {
+                  $c.Close()
+                }
+              } catch { }
             }
+            if ($ok) { break }
+            Start-Sleep -Seconds 1
           }
           if (-not $ok) {
-            Write-Warning "Backend did not accept TCP connections on 127.0.0.1:8000 within 60s. Last lines of uvicorn logs:"
+            Write-Warning "Backend did not accept TCP connections on 127.0.0.1 or ::1:8000 within 90s. Last lines of uvicorn logs:"
             if (Test-Path .\uvicorn.out) { Get-Content .\uvicorn.out -Tail 200 | Write-Host }
             if (Test-Path .\uvicorn.err) { Get-Content .\uvicorn.err -Tail 200 | Write-Host }
             exit 1
